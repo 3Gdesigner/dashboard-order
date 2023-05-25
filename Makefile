@@ -1,4 +1,4 @@
-DOCKER_NAME=vite
+DOCKER_NAME=razor
 CURRENT_DIR=$(patsubst %/,%,$(dir $(realpath $(firstword $(MAKEFILE_LIST)))))
 #DIR_BASENAME=$(shell basename $(CURRENT_DIR))
 ROOT_DIR=$(CURRENT_DIR)
@@ -7,8 +7,10 @@ CURRENT_USER=sudo
 DOCKER_COMPOSE?=docker-compose
 DOCKER_COMPOSE_RUN=$(DOCKER_COMPOSE) run --rm
 DOCKER_EXEC_TOOLS_APP=$(CURRENT_USER) docker exec -it $(DOCKER_NAME) sh
-NODE_INSTALL="yarn i"
-SERVER_RUN="yarn & yarn dev"
+#NODE_INSTALL="yarn install"
+#SERVER_RUN="yarn dev"
+NODE_INSTALL="npm i"
+SERVER_RUN="npm run dev"
 
 #
 # Exec containers
