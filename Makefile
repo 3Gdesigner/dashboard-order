@@ -1,4 +1,4 @@
-DOCKER_NAME=razor
+DOCKER_NAME=dash
 CURRENT_DIR=$(patsubst %/,%,$(dir $(realpath $(firstword $(MAKEFILE_LIST)))))
 #DIR_BASENAME=$(shell basename $(CURRENT_DIR))
 ROOT_DIR=$(CURRENT_DIR)
