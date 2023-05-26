@@ -14,6 +14,7 @@ import ArrowLeftIcon from "./icons/arrow-left.svg";
 import BoxIcon from "./icons/box.svg";
 import TshertIcon from "./icons/t-shirt.svg";
 import ChevronRightIcon from "./icons/chevron-right.svg";
+import { computed } from "vue";
 
 const menu = [
     [
@@ -54,6 +55,27 @@ const products = [
         category: "Pack",
     },
 ];
+
+const orders = [
+    { productName: "Swag -- Pack 1/29/2020", price: 75, quantity: 8 },
+    { productName: "Tech Pack-- Pack 1/29/2020", price: 26, quantity: 24 },
+    { productName: "Bella + Canva Tee", price: 14, quantity: 32 },
+    { productName: "Nike Cap", price: 7.6, quantity: 21 },
+    { productName: "Swag -- Pack 1/29/2020", price: 75, quantity: 23 },
+    { productName: "Preset Pack -- Pack 1/29/2020", price: 30, quantity: 24 },
+    { productName: "Swag Pack + Nike cap", price: 18, quantity: 3 },
+    { productName: "Pluk Swag -- Pack ", price: 30, quantity: 2 },
+];
+
+const formatMoney = (value) =>
+    new Intl.NumberFormat("en-us", {
+        style: "currency",
+        currency: "USD",
+    }).format(value);
+
+const totalOrder = computed(() =>
+    orders.reduce((total, order) => total + order.price * order.quantity, 0)
+);
 </script>
 <template>
     <div class="fonts-sans flex h-screen w-full bg-white text-gray-900">
@@ -87,169 +109,196 @@ const products = [
                 </li>
             </ul>
         </aside>
-        <main class="flex flex-col px-10 py-4">
-            <button class="flex items-center gap-x-1 text-gray-400">
-                <ArrowLeftIcon class="h-4 w-4 fill-current" />
-                <span class="inline-block pt-0.5 text-sm leading-6"
-                    >Back to Orders</span
-                >
-            </button>
+        <main class="flex-1 overflow-y-scroll">
+            <div class="flex flex-col px-10 py-4">
+                <button class="flex items-center gap-x-1 text-gray-400">
+                    <ArrowLeftIcon class="h-4 w-4 fill-current" />
+                    <span class="inline-block pt-0.5 text-sm leading-6"
+                        >Back to Orders</span
+                    >
+                </button>
 
-            <section class="pt-6">
-                <h1 class="text-2xl font-bold text-gray-600">Products</h1>
-                <div class="grid grid-cols-3 gap-x-6 py-6">
-                    <article v-for="product in products">
-                        <div
-                            class="flex aspect-square items-center justify-center overflow-hidden bg-gray-200"
-                        >
-                            <img :src="product.imgUrl" alt="" />
-                        </div>
-                        <div>
-                            <div class="flex flex-col p-6">
-                                <div class="flex items-center justify-between">
-                                    <h2 class="font-semibold tracking-wide">
-                                        {{ product.name }}
-                                    </h2>
-                                    <span class="flex items-center gap-x-1">
-                                        <BoxIcon
-                                            v-if="product.category === 'Pack'"
-                                            class="h-4 w-4 fill-current text-gray-400"
-                                        />
-                                        <TshertIcon
-                                            v-else
-                                            class="h-4 w-4 fill-current text-gray-400"
-                                        />
-                                        <span
-                                            class="text-sm font-semibold tracking-wide text-gray-800"
-                                            >{{ product.category }}
+                <section class="pt-6">
+                    <h1 class="text-2xl font-bold text-gray-600">Products</h1>
+                    <div class="grid grid-cols-3 gap-x-6 py-6">
+                        <article v-for="product in products">
+                            <div
+                                class="flex aspect-square items-center justify-center overflow-hidden rounded-t-2xl bg-gray-200"
+                            >
+                                <img :src="product.imgUrl" alt="" />
+                            </div>
+                            <div>
+                                <div class="flex flex-col p-6">
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <h2 class="font-semibold tracking-wide">
+                                            {{ product.name }}
+                                        </h2>
+                                        <span class="flex items-center gap-x-1">
+                                            <BoxIcon
+                                                v-if="
+                                                    product.category === 'Pack'
+                                                "
+                                                class="h-4 w-4 fill-current text-gray-400"
+                                            />
+                                            <TshertIcon
+                                                v-else
+                                                class="h-4 w-4 fill-current text-gray-400"
+                                            />
+                                            <span
+                                                class="text-sm font-semibold tracking-wide text-gray-800"
+                                                >{{ product.category }}
+                                            </span>
                                         </span>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-gray-400"
+                                        >Color:
+                                        <span class="text-gray-600">{{
+                                            product.color
+                                        }}</span>
                                     </span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-400"
-                                    >Color:
-                                    <span class="text-gray-600">{{
-                                        product.color
-                                    }}</span>
-                                </span>
 
+                                    <a
+                                        href="#"
+                                        class="mt-6 inline-block text-center text-sm font-semibold text-blue-500 hover:text-blue-600"
+                                    >
+                                        View Mockups
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="py-6">
+                    <h1 class="text-2xl font-bold text-gray-600">
+                        Shipping & Storage
+                    </h1>
+                    <div class="relative grid grid-cols-2 gap-x-6 pt-6">
+                        <div
+                            class="relative overflow-hidden rounded-2xl border border-gray-100 p-6"
+                        >
+                            <div
+                                class="itens-center flex justify-between border-b border-gray-100 pb-4"
+                            >
+                                <h1 class="font-semibold">
+                                    Ship Swag to Recipient
+                                </h1>
                                 <a
                                     href="#"
-                                    class="mt-6 inline-block text-center text-sm font-semibold text-blue-500 hover:text-blue-600"
+                                    class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
                                 >
-                                    View Mockups
+                                    <span>View Shippments</span>
+                                    <ChevronRightIcon
+                                        class="h-4 w-4 fill-current"
+                                    />
                                 </a>
                             </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
+                            <div class="relative grid grid-cols-2 gap-x-4 pt-4">
+                                <div>
+                                    <div class="text-sm text-gray-600">
+                                        Shippmnets Created
+                                    </div>
+                                    <div class="pt-2 text-lg font-semibold">
+                                        350
+                                    </div>
+                                </div>
 
-            <section class="py-6">
-                <h1 class="text-2xl font-bold text-gray-600">
-                    Shipping & Storage
-                </h1>
-                <div class="relative grid grid-cols-2 gap-x-6 pt-6">
-                    <div
-                        class="relative rounded-2xl border border-gray-100 p-6"
-                    >
-                        <div
-                            class="itens-center flex justify-between border-b border-gray-100 pb-4"
-                        >
-                            <h1 class="font-semibold">
-                                     Ship Swag to Recipient
-                            </h1>
-                            <a
-                                href="#"
-                                class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
+                                <div>
+                                    <div class="text-sm text-gray-600">
+                                        Total Shippments
+                                    </div>
+                                    <div class="pt-2 text-lg font-semibold">
+                                        $1,400.00
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
                             >
-                                <span>View Shippments</span>
-                                <ChevronRightIcon
-                                    class="h-4 w-4 fill-current"
-                                />
-                            </a>
+                                Create Shippment
+                            </button>
+                            <img
+                                src="/img/shipment.png"
+                                alt=""
+                                class="absolute bottom-0 right-0 w-28"
+                            />
                         </div>
-                        <div class="relative grid grid-cols-2 gap-x-4 pt-4 ">
-                            <div>
-                                <div class="text-sm text-gray-600">
-                                    Shippmnets Created
-                                </div>
-                                <div class="pt-2 text-lg font-semibold">
-                                    350
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="text-sm text-gray-600">
-                                    Total Shippments
-                                </div>
-                                <div class="pt-2 text-lg font-semibold">
-                                    $1,400.00
-                                </div>
-                            </div>
-                        </div>
-                        <button
-                            class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
-                        >
-                            Create Shippment
-                        </button>
-                        <img
-                            src="/img/shipment.png"
-                            alt=""
-                            class="absolute bottom-0 right-0 w-28"
-                        />
-                    </div>
-                    <div
-                        class="relative rounded-2xl border border-gray-100 p-6"
-                    >
                         <div
-                            class="itens-center flex justify-between border-b border-gray-100 pb-4"
+                            class="relative overflow-hidden rounded-2xl border border-gray-100 p-6"
                         >
-                            <h1 class="font-semibold">
-                                Send Swag to Recipient
-                            </h1>
-                            <a
-                                href="#"
-                                class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
+                            <div
+                                class="itens-center flex justify-between border-b border-gray-100 pb-4"
                             >
-                                <span>View SwagUp Storage</span>
-                                <ChevronRightIcon
-                                    class="h-4 w-4 fill-current"
-                                />
-                            </a>
-                        </div>
-                        <div class="relative grid grid-cols-2 gap-x-4 pt-4 ">
-                            <div>
-                                <div class="text-sm text-gray-600">
-                                    Shippmnets Created
-                                </div>
-                                <div class="pt-2 text-lg font-semibold">
-                                    350
-                                </div>
+                                <h1 class="font-semibold">
+                                    Send Swag to Recipient
+                                </h1>
+                                <a
+                                    href="#"
+                                    class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
+                                >
+                                    <span>View SwagUp Storage</span>
+                                    <ChevronRightIcon
+                                        class="h-4 w-4 fill-current"
+                                    />
+                                </a>
                             </div>
+                            <div class="relative grid grid-cols-2 gap-x-4 pt-4">
+                                <div>
+                                    <div class="text-sm text-gray-600">
+                                        Shippmnets Created
+                                    </div>
+                                    <div class="pt-2 text-lg font-semibold">
+                                        350
+                                    </div>
+                                </div>
 
-                            <div>
-                                <div class="text-sm text-gray-600">
-                                    Total Shippments
-                                </div>
-                                <div class="pt-2 text-lg font-semibold">
-                                    $1,400.00
+                                <div>
+                                    <div class="text-sm text-gray-600">
+                                        Total Shippments
+                                    </div>
+                                    <div class="pt-2 text-lg font-semibold">
+                                        $1,400.00
+                                    </div>
                                 </div>
                             </div>
+                            <button
+                                class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
+                            >
+                                Update Shippment
+                            </button>
+                            <img
+                                src="/img/storage.png"
+                                alt=""
+                                class="absolute bottom-0 right-0 w-28"
+                            />
                         </div>
-                        <button
-                            class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
-                        >
-                            Create Shippment
-                        </button>
-                        <img
-                            src="/img/storage.png"
-                            alt=""
-                            class="absolute bottom-0 right-0 w-28"
-                        />
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </main>
-        <aside class="w-72 border-l border-gray-200 ?"></aside>
+        <aside class="w-72 border-l border-gray-200 ?">
+            <div class="border-b border-gray-200 px-6 py-4">
+                <h5 class="font-semibold leading-relaxed text-gray-800">
+                    Order #22353 Sumary
+                </h5>
+                <p class="text-xs leading-loose text-gray-400">
+                    Order Placed: 12-30-2020
+                </p>
+            </div>
+
+            <ul>
+                <li v-for="order in orders">
+                    <div>{{ order.productName }}</div>
+                    <div>
+                        <span>{{ order.price }} * {{ order.quantity }}</span>
+                        <span>{{ order.price * order.quantity }}</span>
+                    </div>
+                    <a href="#">Edit Breakdwon</a>
+                </li>
+            </ul>
+        </aside>
     </div>
 </template>
