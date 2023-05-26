@@ -11,8 +11,9 @@ import HelpIcon from "./icons/help.svg";
 import LogoutIcon from "./icons/logout.svg";
 import ChevronIcon from "./icons/chevron-left.svg";
 import ArrowLeftIcon from "./icons/arrow-left.svg";
-import Boxicon from "./icons/box.svg";
-import Tsherticon from "./icons/t-shirt.svg";
+import BoxIcon from "./icons/box.svg";
+import TshertIcon from "./icons/t-shirt.svg";
+import ChevronRightIcon from "./icons/chevron-right.svg";
 
 const menu = [
     [
@@ -43,7 +44,7 @@ const products = [
         imgUrl: "/img/swag-pack.png",
         status: "In-Design",
         color: "Custom",
-        category: "Pack",
+        category: "Bulk",
     },
     {
         name: "Bulk Swag",
@@ -93,12 +94,13 @@ const products = [
                     >Back to Orders</span
                 >
             </button>
+
             <section class="pt-6">
                 <h1 class="text-2xl font-bold text-gray-600">Products</h1>
                 <div class="grid grid-cols-3 gap-x-6 py-6">
                     <article v-for="product in products">
                         <div
-                            class="flex aspect-square items-center justify-center bg-gray-200"
+                            class="flex aspect-square items-center justify-center overflow-hidden bg-gray-200"
                         >
                             <img :src="product.imgUrl" alt="" />
                         </div>
@@ -109,8 +111,14 @@ const products = [
                                         {{ product.name }}
                                     </h2>
                                     <span class="flex items-center gap-x-1">
-                                        <Boxicon class="h-4 w-4 text-gray-400 fill-current" />
-                                        <Tsherticon class="h-4 w-4 text-gray-400 fill-current" />
+                                        <BoxIcon
+                                            v-if="product.category === 'Pack'"
+                                            class="h-4 w-4 fill-current text-gray-400"
+                                        />
+                                        <TshertIcon
+                                            v-else
+                                            class="h-4 w-4 fill-current text-gray-400"
+                                        />
                                         <span
                                             class="text-sm font-semibold tracking-wide text-gray-800"
                                             >{{ product.category }}
@@ -119,10 +127,10 @@ const products = [
                                 </div>
                                 <span class="text-sm font-medium text-gray-400"
                                     >Color:
-                                    <span class="text-gray-900">{{
+                                    <span class="text-gray-600">{{
                                         product.color
-                                    }}</span></span
-                                >
+                                    }}</span>
+                                </span>
 
                                 <a
                                     href="#"
@@ -133,6 +141,112 @@ const products = [
                             </div>
                         </div>
                     </article>
+                </div>
+            </section>
+
+            <section class="py-6">
+                <h1 class="text-2xl font-bold text-gray-600">
+                    Shipping & Storage
+                </h1>
+                <div class="relative grid grid-cols-2 gap-x-6 pt-6">
+                    <div
+                        class="relative rounded-2xl border border-gray-100 p-6"
+                    >
+                        <div
+                            class="itens-center flex justify-between border-b border-gray-100 pb-4"
+                        >
+                            <h1 class="font-semibold">
+                                     Ship Swag to Recipient
+                            </h1>
+                            <a
+                                href="#"
+                                class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
+                            >
+                                <span>View Shippments</span>
+                                <ChevronRightIcon
+                                    class="h-4 w-4 fill-current"
+                                />
+                            </a>
+                        </div>
+                        <div class="relative grid grid-cols-2 gap-x-4 pt-4 ">
+                            <div>
+                                <div class="text-sm text-gray-600">
+                                    Shippmnets Created
+                                </div>
+                                <div class="pt-2 text-lg font-semibold">
+                                    350
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-sm text-gray-600">
+                                    Total Shippments
+                                </div>
+                                <div class="pt-2 text-lg font-semibold">
+                                    $1,400.00
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
+                        >
+                            Create Shippment
+                        </button>
+                        <img
+                            src="/img/shipment.png"
+                            alt=""
+                            class="absolute bottom-0 right-0 w-28"
+                        />
+                    </div>
+                    <div
+                        class="relative rounded-2xl border border-gray-100 p-6"
+                    >
+                        <div
+                            class="itens-center flex justify-between border-b border-gray-100 pb-4"
+                        >
+                            <h1 class="font-semibold">
+                                Send Swag to Recipient
+                            </h1>
+                            <a
+                                href="#"
+                                class="itens-center flex text-sm font-semibold text-blue-500 hover:text-blue-600"
+                            >
+                                <span>View SwagUp Storage</span>
+                                <ChevronRightIcon
+                                    class="h-4 w-4 fill-current"
+                                />
+                            </a>
+                        </div>
+                        <div class="relative grid grid-cols-2 gap-x-4 pt-4 ">
+                            <div>
+                                <div class="text-sm text-gray-600">
+                                    Shippmnets Created
+                                </div>
+                                <div class="pt-2 text-lg font-semibold">
+                                    350
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-sm text-gray-600">
+                                    Total Shippments
+                                </div>
+                                <div class="pt-2 text-lg font-semibold">
+                                    $1,400.00
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="mt-4 rounded-full border border-blue-500 border-b-blue-600 px-5 py-2 text-sm font-semibold leading-relaxed text-blue-500 hover:border-blue-500 hover:bg-blue-500 hover:text-white"
+                        >
+                            Create Shippment
+                        </button>
+                        <img
+                            src="/img/storage.png"
+                            alt=""
+                            class="absolute bottom-0 right-0 w-28"
+                        />
+                    </div>
                 </div>
             </section>
         </main>
