@@ -14,6 +14,7 @@ import ArrowLeftIcon from "./icons/arrow-left.svg";
 import BoxIcon from "./icons/box.svg";
 import TshertIcon from "./icons/t-shirt.svg";
 import ChevronRightIcon from "./icons/chevron-right.svg";
+import InforIcon from "./icons/info.svg";
 import { computed } from "vue";
 
 const menu = [
@@ -279,7 +280,7 @@ const totalOrder = computed(() =>
                 </section>
             </div>
         </main>
-        <aside class="w-72 border-l border-gray-200 ?">
+        <aside class="w-72 border-l border-gray-200">
             <div class="border-b border-gray-200 px-6 py-4">
                 <h5 class="font-semibold leading-relaxed text-gray-800">
                     Order #22353 Sumary
@@ -289,16 +290,73 @@ const totalOrder = computed(() =>
                 </p>
             </div>
 
-            <ul>
-                <li v-for="order in orders">
-                    <div>{{ order.productName }}</div>
-                    <div>
-                        <span>{{ order.price }} * {{ order.quantity }}</span>
-                        <span>{{ order.price * order.quantity }}</span>
+            <ul class="px-6">
+                <li
+                    v-for="order in orders"
+                    class="border-b border-gray-200 py-2"
+                >
+                    <div class="mt-2 text-sm font-semibold text-gray-800">
+                        {{ order.productName }}
                     </div>
-                    <a href="#">Edit Breakdwon</a>
+                    <div
+                        class="mt-1 flex items-center justify-between text-xs text-gray-400"
+                    >
+                        <span
+                            >{{ formatMoney(order.price) }} x
+                            {{ order.quantity }}</span
+                        >
+                        <span class="font-semibold text-gray-800">
+                            {{ formatMoney(order.price * order.quantity) }}
+                        </span>
+                    </div>
+                    <a
+                        href="#"
+                        class="mt-2 inline-block text-xs font-semibold leading-relaxed text-blue-500 hover:text-blue-600"
+                        >Edit breakdwon</a
+                    >
                 </li>
             </ul>
+            <div class="border-t border-gray-200 px-6 pb-4">
+                <div class="py-2">
+                    <div class="itens-center flex justify-between">
+                        <div class="text-xs text-gray-400">Subtotal</div>
+                        <span class="font-semibold">{{
+                            formatMoney(totalOrder)
+                        }}</span>
+                    </div>
+                    <div class="itens-center flex justify-between">
+                        <div
+                            class="flex items-center gap-x-1 text-xs text-gray-400"
+                        >
+                            <span> Shippings</span>
+                            <InforIcon class="h-4 w-4" />
+                        </div>
+                        <span>TDB</span>
+                    </div>
+                    <div class="itens-center flex justify-between">
+                        <div
+                            class="flex items-center gap-x-1 text-xs text-gray-400"
+                        >
+                            <span>Warehouse</span>
+                            <InforIcon class="h-4 w-4" />
+                        </div>
+                        <span>TDB</span>
+                    </div>
+                </div>
+                <div
+                    class="itens-center flex justify-between border-t border-gray-200 py-4"
+                >
+                    <div class="text-sm text-gray-400">Total</div>
+                    <div class="text-lg font-semibold">
+                        {{ formatMoney(totalOrder) }}
+                    </div>
+                </div>
+                <button
+                    class="flex w-full items-center justify-center rounded-2xl bg-blue-500 py-4 text-sm font-semibold text-white hover:bg-blue-600"
+                >
+                    Continue
+                </button>
+            </div>
         </aside>
     </div>
 </template>
