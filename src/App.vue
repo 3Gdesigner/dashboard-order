@@ -71,7 +71,7 @@ const orders = [
 const formatMoney = (value) =>
     new Intl.NumberFormat("en-us", {
         style: "currency",
-        currency: "USD",
+        currency: "AOA",
     }).format(value);
 
 const totalOrder = computed(() =>
@@ -280,7 +280,7 @@ const totalOrder = computed(() =>
                 </section>
             </div>
         </main>
-        <aside class="w-72 border-l border-gray-200">
+        <aside class="flex w-72 flex-col border-l border-gray-200">
             <div class="border-b border-gray-200 px-6 py-4">
                 <h5 class="font-semibold leading-relaxed text-gray-800">
                     Order #22353 Sumary
@@ -290,10 +290,10 @@ const totalOrder = computed(() =>
                 </p>
             </div>
 
-            <ul class="px-6">
+            <ul class="flex-1 overflow-scroll px-6">
                 <li
                     v-for="order in orders"
-                    class="border-b border-gray-200 py-2"
+                    class="border-b border-gray-200 py-2 last:border-none"
                 >
                     <div class="mt-2 text-sm font-semibold text-gray-800">
                         {{ order.productName }}
@@ -328,19 +328,23 @@ const totalOrder = computed(() =>
                         <div
                             class="flex items-center gap-x-1 text-xs text-gray-400"
                         >
-                            <span> Shippings</span>
-                            <InforIcon class="h-4 w-4" />
+                            <span>Shippings</span>
+                            <InforIcon
+                                class="h-4 w-4 stroke-current text-gray-300"
+                            />
                         </div>
-                        <span>TDB</span>
+                        <span class="text-gray-300">TDB</span>
                     </div>
                     <div class="itens-center flex justify-between">
                         <div
                             class="flex items-center gap-x-1 text-xs text-gray-400"
                         >
                             <span>Warehouse</span>
-                            <InforIcon class="h-4 w-4" />
+                            <InforIcon
+                                class="h-4 w-4 stroke-current text-gray-300"
+                            />
                         </div>
-                        <span>TDB</span>
+                        <span class="text-gray-300">TDB</span>
                     </div>
                 </div>
                 <div
